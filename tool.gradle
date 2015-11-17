@@ -102,7 +102,7 @@ Version getVersionFromFile(String verFilePath) {
         read.close()
         version.hVerName = versionProps['hVerName'] ?: Version.DEFAULT_H_VER_NAME
         version.lVerName = versionProps['lVerName'] ?: Version.DEFAULT_L_VER_NAME
-        version.verCode = versionProps['verCode']?Version.DEFAULT_VERSION_CODE：versionProps['verCode'].toInteger()
+        version.verCode = versionProps['verCode'] ? Version.DEFAULT_VERSION_CODE: versionProps['verCode'].toInteger()
     } else {
         version.hVerName = Version.DEFAULT_H_VER_NAME
         version.lVerName = Version.DEFAULT_L_VER_NAME
