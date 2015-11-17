@@ -38,4 +38,4 @@ android {
 dependencies {
 }
 
-apply from: 'tool.gradle'
+apply from: '../../../tool.gradle'
