@@ -7,6 +7,7 @@
 - 根据项目版本文件，自动更改和升级版本。
 - 更改打包后产物的名称。
 - 收集 Android 打包产物（apk、 aar、proguard 文件等）。
+- 渠道打包（美团式）。
 
 以上所有的功能，默认的，只在执行 `assemble` 任务时才会执行。同时，本脚本的功能以及目标比较死板，使用者可以根据自己项目的具体情况，进行修改。
 
@@ -100,4 +101,41 @@ release 产物的版本名称为 `1.2.3` ，版本号为 `226` ； debug 产物�
 
   ```
   -Poutputs=path/to/your/outputs/folder -PproName=your_project_name
+  ```
+
+### 渠道打包
+
+此功能需要开启 **收集打包功能** 。
+
+参数名称：`channelFile` ，参数值生成产物存放的目录，如果目录不存在，会自动创建。**开关参数**。  
+
+生成的渠道包存放在 `{outputs}/{proName}/{date-versionName-versionCode}/{flavor}-{buildType}/channel/` 文件夹中。
+
+关于渠道列表文件的每一行内容，有以下准则：
+- 一行只有一个渠道号。
+- 每一行均需要含有 `-` 字符。
+- `-` 字符前的内容为写入 `META-INF/` 中的渠道文件的名称，字符后的内容为 apk 文件名称追加的内容。
+- 以 `#` 开头的行将会被忽略。
+
+例如，在这么一个渠道列表文件中：
+
+```
+    #channel_channel1-channel1
+    channel_channel2-channel2
+```
+
+第一行会被自动忽略；  
+第二行为有效的数据，写入 `META-INF/` 中的渠道文件名称为 `channel_channel2` ，生成的渠道 apk 文件的名称将会追加 `-channel2` 。
+
+配置方式：
+- 方法1：`gradle.properties` 文件中添加以下内容：
+
+  ```
+  channelFile=path/to/your/channel/file
+  ```
+
+- 方法2：Gradle 执行时添加参数：
+
+  ```
+  -PchannelFile=path/to/your/channel/file
   ```
