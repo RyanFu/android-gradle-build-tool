@@ -1,5 +1,9 @@
 # Android Gradle Build Tool
 
+**DEPRECATED**
+
+请使用更加高效的工具插件 [agbt](https://github.com/yanglw/android-gradle-build-tool) 。
+
 ## 说明
 一个工具脚本，帮助 Android 打包，支持 application 项目与 library 项目。
 
